@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía y calculadora de rampas · Rampa Fácil</title>
+<meta name="description" content="Calcule su rampa, vea las medidas ADA, los cinco modelos, diseños elegantes y cómo pedir la rampa con Sección 8 en Chicago.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0F3D70">
+<meta property="og:site_name" content="Rampa Fácil">
+<meta property="og:title" content="Guía y calculadora de rampas accesibles">
+<meta property="og:description" content="Medidas ADA, modelos, diseños y ayuda para Sección 8 en Chicago.">
+<meta property="og:image" content="https://rampa-facil.onrender.com/img/og-image.png">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/guia.css">
+<script src="/js/common.js" defer></script>
+<script src="/js/guia.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header id="site-header" class="site-header"></header>
+<main id="main" class="guia">
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Guía de diseño · Vivienda Sección 8 · Chicago, Illinois</span>
+  <h1>Modelos de rampas accesibles para vivienda Sección 8</h1>
+  <p class="lede">Cinco modelos de rampa listos para adaptar a casas y edificios con vales de vivienda (Housing Choice Voucher) o vivienda subsidiada por HUD. Cada modelo indica medidas mínimas, para qué tipo de discapacidad funciona mejor y cuándo conviene usarlo. Arriba hay una calculadora para dimensionar la rampa según la altura de la entrada.</p>
+  <div class="tags">
+    <span class="tag">ADA 2010 §405 Rampas</span>
+    <span class="tag">Sección 504 / UFAS (HUD)</span>
+    <span class="tag">Fair Housing Act</span>
+    <span class="tag">Código de Accesibilidad de Illinois</span>
+    <span class="tag">Medidas en pulgadas y pies, con metros</span>
+  </div>
+</header>
+
+<!-- CALCULADORA -->
+<section id="calculadora">
+  <div class="prose">
+    <span class="eyebrow">Paso 1</span>
+    <h2>Calcula tu rampa</h2>
+    <p>Mide la altura desde el suelo (o la banqueta) hasta el piso de la puerta de entrada. Esa es la <em>elevación total</em>. La calculadora aplica las reglas de pendiente máxima, descansos cada 30 pulgadas de altura y pasamanos.</p>
+  </div>
+  <div class="calc">
+    <div class="calc-grid">
+      <div class="field">
+        <label for="rise">Elevación total (pulgadas)</label>
+        <input id="rise" type="number" min="1" max="120" step="0.5" value="24">
+        <small>Ejemplo: 3 escalones de 8" = 24"</small>
+      </div>
+      <div class="field">
+        <label for="slope">Pendiente</label>
+        <select id="slope">
+          <option value="12">1:12 — máximo permitido</option>
+          <option value="16" selected>1:16 — recomendado</option>
+          <option value="20">1:20 — muy suave</option>
+        </select>
+        <small>1:12 = 1" de altura por cada 12" de largo</small>
+      </div>
+      <div class="field">
+        <label for="space">Espacio recto disponible (pies)</label>
+        <input id="space" type="number" min="0" max="200" step="1" value="30">
+        <small>Largo libre frente a la entrada</small>
+      </div>
+      <div class="field">
+        <label for="user">Usuario principal</label>
+        <select id="user">
+          <option value="manual">Silla de ruedas manual</option>
+          <option value="power">Silla eléctrica o scooter</option>
+          <option value="walker">Andadera, bastón o muletas</option>
+          <option value="senior">Adulto mayor / poca resistencia</option>
+          <option value="vision">Baja visión o ceguera</option>
+        </select>
+        <small>Ajusta el ancho y las recomendaciones</small>
+      </div>
+    </div>
+
+    <div class="results" id="results" aria-live="polite"></div>
+
+    <div class="profile" aria-label="Perfil lateral de la rampa calculada">
+      <svg id="profileSvg" viewBox="0 0 900 200" role="img"></svg>
+    </div>
+
+    <div class="verdict">
+      <div class="pills" id="pills"></div>
+      <p class="rec" id="rec"></p>
+    </div>
+  </div>
+</section>
+
+<!-- REGLAS -->
+<section id="reglas">
+  <div class="prose">
+    <span class="eyebrow">Paso 2</span>
+    <h2>Medidas que toda rampa debe cumplir</h2>
+    <p>Estas son las medidas de las Normas ADA 2010 (sección 405), que coinciden con lo que piden el Código de Accesibilidad de Illinois y HUD para vivienda con fondos federales. Si una rampa no las cumple, puede fallar la inspección de la vivienda.</p>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Elemento</th><th>Medida</th><th>Detalle</th></tr></thead>
+      <tbody>
+        <tr><td>Pendiente máxima</td><td class="num">1:12 (8.33 %)</td><td>Para cada pulgada de altura, 12 pulgadas (1 pie) de largo. Más suave es mejor: 1:16 o 1:20 para vivienda.</td></tr>
+        <tr><td>Altura máxima por tramo</td><td class="num">30" (76 cm)</td><td>Después de 30" de subida hace falta un descanso plano. A 1:12 eso equivale a 30 pies de largo.</td></tr>
+        <tr><td>Ancho libre</td><td class="num">36" mín. (91 cm)</td><td>Medido entre pasamanos. Para scooters y sillas eléctricas se recomiendan 42"–48".</td></tr>
+        <tr><td>Descansos</td><td class="num">60" de largo</td><td>Arriba, abajo y entre tramos. Al menos tan anchos como la rampa. Donde la rampa cambia de dirección: 60" × 60" (152 × 152 cm).</td></tr>
+        <tr><td>Descanso frente a la puerta</td><td class="num">60" × 60"</td><td>Debe dejar espacio para abrir la puerta sin bajarse de la plataforma, incluyendo espacio libre del lado de la manija.</td></tr>
+        <tr><td>Pasamanos</td><td class="num">34"–38" de alto</td><td>En ambos lados si la elevación es mayor de 6". Continuos, con agarre redondo de 1¼"–2" de diámetro y 1½" separados de la pared.</td></tr>
+        <tr><td>Extensión del pasamanos</td><td class="num">12" (30 cm)</td><td>Horizontal, al inicio y al final de cada tramo, terminando hacia la pared o el poste.</td></tr>
+        <tr><td>Protección de borde</td><td class="num">Bordillo 4" o barrera</td><td>Evita que una rueda o bastón se salga. Se cumple con un bordillo de 4" o un riel bajo que no deje pasar una esfera de 4".</td></tr>
+        <tr><td>Pendiente transversal</td><td class="num">1:48 máx. (2 %)</td><td>La rampa no debe inclinarse hacia los lados.</td></tr>
+        <tr><td>Superficie</td><td class="num">Firme y antideslizante</td><td>Concreto escobillado, madera con cinta o pintura antideslizante, o rejilla de aluminio. Que no acumule agua ni hielo.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- MODELOS -->
+<section id="modelos">
+  <div class="prose">
+    <span class="eyebrow">Paso 3</span>
+    <h2>Los cinco modelos</h2>
+    <p>Los planos son vistas desde arriba. El azul claro es la rampa, el gris es el descanso plano y la línea naranja es el pasamanos. Las medidas de ejemplo usan pendiente 1:12; con 1:16 multiplica el largo de rampa por 1.33.</p>
+  </div>
+
+  <div class="models">
+
+    <!-- A RECTA -->
+    <article class="model">
+      <div class="model-head"><span class="code">A</span><h3>Rampa recta</h3></div>
+      <div class="plan">
+        <svg viewBox="0 0 520 170" role="img" aria-label="Plano de rampa recta con descanso inferior, tramo de 24 pies y descanso superior junto a la casa">
+          <rect class="house" x="470" y="20" width="50" height="130"/>
+          <text x="495" y="90" text-anchor="middle" font-size="11" transform="rotate(-90 495 90)">VIVIENDA</text>
+          <rect class="land" x="20" y="55" width="50" height="60"/>
+          <rect class="ramp" x="70" y="55" width="340" height="60"/>
+          <rect class="land" x="410" y="55" width="60" height="60"/>
+          <line class="rail" x1="10" y1="55" x2="470" y2="55"/>
+          <line class="rail" x1="10" y1="115" x2="470" y2="115"/>
+          <path class="arrow" d="M100 85 H380 M370 79 L380 85 L370 91"/>
+          <text x="240" y="80" text-anchor="middle" font-size="11">SUBE</text>
+          <line class="dim" x1="70" y1="135" x2="410" y2="135"/><line class="dim" x1="70" y1="130" x2="70" y2="140"/><line class="dim" x1="410" y1="130" x2="410" y2="140"/>
+          <text x="240" y="152" text-anchor="middle" font-size="12">24' (7.3 m) · sube 24"</text>
+          <text x="45" y="45" text-anchor="middle" font-size="11">5'</text>
+          <text x="440" y="45" text-anchor="middle" font-size="11">5'×5'</text>
+          <text x="20" y="152" font-size="11">ancho 36" libre</text>
+        </svg>
+      </div>
+      <dl class="specs">
+        <dt>Elevación</dt><dd>hasta 30" en un solo tramo</dd>
+        <dt>Largo ejemplo</dt><dd>24" de altura → 24' rampa + 10' descansos = 34'</dd>
+        <dt>Material</dt><dd>madera tratada, concreto o aluminio</dd>
+      </dl>
+      <p class="fit"><strong>Mejor para:</strong> casas con jardín frontal largo. Es la más fácil de usar para todos los tipos de discapacidad porque no tiene giros. Ideal para discapacidad cognitiva o visual.</p>
+    </article>
+
+    <!-- B EN L -->
+    <article class="model">
+      <div class="model-head"><span class="code">B</span><h3>Rampa en L (giro de 90°)</h3></div>
+      <div class="plan">
+        <svg viewBox="0 0 520 230" role="img" aria-label="Plano de rampa en L: primer tramo a lo largo de la fachada, descanso de giro de 5 por 5 pies, segundo tramo hacia la calle">
+          <rect class="house" x="20" y="10" width="480" height="40"/>
+          <text x="260" y="35" text-anchor="middle" font-size="11">VIVIENDA</text>
+          <rect class="land" x="380" y="50" width="60" height="60"/>
+          <rect class="ramp" x="140" y="50" width="240" height="60"/>
+          <rect class="land" x="80" y="50" width="60" height="60"/>
+          <rect class="ramp" x="80" y="110" width="60" height="100"/>
+          <line class="rail" x1="80" y1="110" x2="80" y2="220"/>
+          <line class="rail" x1="140" y1="220" x2="140" y2="110"/>
+          <path class="rail" d="M70 50 H440"/>
+          <path class="rail" d="M140 110 H440"/>
+          <path class="arrow" d="M110 195 V85 H350 M340 79 L350 85 L340 91"/>
+          <text x="410" y="84" text-anchor="middle" font-size="10">PUERTA</text>
+          <text x="110" y="84" text-anchor="middle" font-size="10">GIRO</text>
+          <text x="260" y="130" text-anchor="middle" font-size="12">15' · sube 15"</text>
+          <text x="152" y="170" font-size="12">15' · sube 15"</text>
+          <text x="110" y="226" text-anchor="middle" font-size="10">INICIO</text>
+          <text x="300" y="185" font-size="11">Descanso de giro: 60"×60"</text>
+          <text x="300" y="202" font-size="11">Total sube 30"</text>
+        </svg>
+      </div>
+      <dl class="specs">
+        <dt>Elevación</dt><dd>24"–60" (2 tramos)</dd>
+        <dt>Descanso de giro</dt><dd>60" × 60" mínimo</dd>
+        <dt>Huella aprox.</dt><dd>20' × 20' para 30" de altura</dd>
+      </dl>
+      <p class="fit"><strong>Mejor para:</strong> lotes de esquina o entradas laterales donde no cabe una rampa recta. El descanso de giro sirve para descansar, lo que ayuda a adultos mayores y usuarios de silla manual.</p>
+    </article>
+
+    <!-- C EN U -->
+    <article class="model">
+      <div class="model-head"><span class="code">C</span><h3>Rampa en U (retorno)</h3></div>
+      <div class="plan">
+        <svg viewBox="0 0 520 220" role="img" aria-label="Plano de rampa en U: dos tramos paralelos de 15 pies conectados por un descanso de retorno">
+          <rect class="house" x="470" y="10" width="50" height="200"/>
+          <text x="495" y="110" text-anchor="middle" font-size="11" transform="rotate(-90 495 110)">VIVIENDA</text>
+          <rect class="land" x="410" y="30" width="60" height="60"/>
+          <rect class="ramp" x="130" y="30" width="280" height="60"/>
+          <rect class="land" x="70" y="30" width="60" height="140"/>
+          <rect class="ramp" x="130" y="110" width="280" height="60"/>
+          <rect class="land" x="410" y="110" width="60" height="60"/>
+          <path class="rail" d="M60 30 H470"/>
+          <path class="rail" d="M130 90 H410"/>
+          <path class="rail" d="M130 110 H410"/>
+          <path class="rail" d="M60 170 H470"/>
+          <path class="rail" d="M70 30 V170"/>
+          <path class="arrow" d="M440 140 H100 V60 H380 M370 54 L380 60 L370 66"/>
+          <text x="440" y="134" text-anchor="middle" font-size="10">INICIO</text>
+          <text x="440" y="54" text-anchor="middle" font-size="10">PUERTA</text>
+          <text x="270" y="200" text-anchor="middle" font-size="12">2 tramos de 15' · sube 30" en total</text>
+          <text x="100" y="190" text-anchor="middle" font-size="11">60" largo</text>
+        </svg>
+      </div>
+      <dl class="specs">
+        <dt>Elevación</dt><dd>30"–60" (o más con más retornos)</dd>
+        <dt>Descanso de retorno</dt><dd>60" de largo × ancho de ambos tramos</dd>
+        <dt>Huella aprox.</dt><dd>25' × 10' para 30" de altura</dd>
+      </dl>
+      <p class="fit"><strong>Mejor para:</strong> frentes angostos típicos de Chicago (lotes de 25'), casas de dos pisos y edificios con entrada elevada. Ocupa la mitad del largo de una rampa recta.</p>
+    </article>
+
+    <!-- D UMBRAL -->
+    <article class="model">
+      <div class="model-head"><span class="code">D</span><h3>Rampa corta de umbral</h3></div>
+      <div class="plan">
+        <svg viewBox="0 0 520 170" role="img" aria-label="Vista lateral de rampa corta de umbral de hasta 6 pulgadas de altura y 6 pies de largo">
+          <line class="ground" x1="10" y1="130" x2="510" y2="130"/>
+          <rect class="house" x="420" y="40" width="90" height="90"/>
+          <text x="465" y="85" text-anchor="middle" font-size="11">PUERTA</text>
+          <polygon class="ramp" points="120,130 360,130 360,100"/>
+          <rect class="land" x="360" y="100" width="60" height="30"/>
+          <line class="dim" x1="120" y1="150" x2="360" y2="150"/><line class="dim" x1="120" y1="145" x2="120" y2="155"/><line class="dim" x1="360" y1="145" x2="360" y2="155"/>
+          <text x="240" y="165" text-anchor="middle" font-size="12">6' (1.8 m)</text>
+          <line class="dim" x1="380" y1="100" x2="380" y2="130"/>
+          <text x="372" y="92" text-anchor="end" font-size="12">≤ 6"</text>
+          <text x="20" y="40" font-size="11">Sin pasamanos obligatorios</text>
+          <text x="20" y="58" font-size="11">Bordes de color contrastante</text>
+          <text x="20" y="76" font-size="11">Umbral de puerta ≤ ½" biselado</text>
+        </svg>
+      </div>
+      <dl class="specs">
+        <dt>Elevación</dt><dd>hasta 6"</dd>
+        <dt>Largo</dt><dd>6' a 1:12 · 8' a 1:16</dd>
+        <dt>Material</dt><dd>caucho, aluminio o concreto</dd>
+      </dl>
+      <p class="fit"><strong>Mejor para:</strong> un solo escalón, umbrales de puerta, entradas a balcón o patio. Barata y removible. Si el usuario usa andadera, se recomienda poner al menos un pasamanos aunque no sea obligatorio.</p>
+    </article>
+
+    <!-- E MODULAR -->
+    <article class="model">
+      <div class="model-head"><span class="code">E</span><h3>Rampa modular de aluminio (removible)</h3></div>
+      <div class="plan">
+        <svg viewBox="0 0 520 170" role="img" aria-label="Vista lateral de rampa modular de aluminio apoyada sobre patas ajustables, sin cimentación permanente">
+          <line class="ground" x1="10" y1="140" x2="510" y2="140"/>
+          <rect class="house" x="440" y="40" width="70" height="100"/>
+          <polygon class="ramp" points="40,140 220,110 220,116 40,146"/>
+          <rect class="land" x="220" y="104" width="50" height="8"/>
+          <polygon class="ramp" points="270,104 390,84 390,90 270,110"/>
+          <rect class="land" x="390" y="78" width="50" height="8"/>
+          <g class="dim"><line x1="130" y1="125" x2="130" y2="140"/><line x1="245" y1="112" x2="245" y2="140"/><line x1="330" y1="97" x2="330" y2="140"/><line x1="415" y1="86" x2="415" y2="140"/></g>
+          <path class="rail" d="M40 110 L220 80 H270 L390 54 H440"/>
+          <text x="20" y="30" font-size="11">Secciones atornilladas · patas ajustables</text>
+          <text x="20" y="48" font-size="11">Se desarma y se lleva al mudarse</text>
+          <text x="250" y="160" text-anchor="middle" font-size="12">Sin cimentación permanente</text>
+        </svg>
+      </div>
+      <dl class="specs">
+        <dt>Elevación</dt><dd>cualquier altura; se arma recta, en L o en U</dd>
+        <dt>Instalación</dt><dd>1–2 días, sin excavar</dd>
+        <dt>Ventaja</dt><dd>propiedad del inquilino, removible</dd>
+      </dl>
+      <p class="fit"><strong>Mejor para:</strong> inquilinos con vale Sección 8 en vivienda privada. Si la paga el inquilino, sigue siendo suya y se la puede llevar al mudarse. Además se instala sin excavar ni tocar la estructura de la casa, así que el propietario suele aprobarla más rápido. La rejilla de aluminio drena agua y nieve.</p>
+    </article>
+
+    <!-- Guía de elección -->
+    <article class="model">
+      <div class="model-head"><h3>¿Cuál modelo elegir?</h3></div>
+      <div class="tbl-wrap gs-1">
+        <table class="gs-2">
+          <thead><tr><th>Elevación</th><th>Mucho espacio</th><th>Poco espacio</th></tr></thead>
+          <tbody>
+            <tr><td class="num">0–6"</td><td>D</td><td>D</td></tr>
+            <tr><td class="num">6–30"</td><td>A</td><td>B o E</td></tr>
+            <tr><td class="num">30–60"</td><td>A con descanso, o B</td><td>C o E</td></tr>
+            <tr><td class="num">más de 60"</td><td colspan="2">C con varios retornos, o considerar elevador de plataforma vertical</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="fit muted">Para elevaciones muy altas la rampa se vuelve larga y cansada. Un elevador de plataforma (platform lift) puede ser más práctico y también cuenta como modificación razonable.</p>
+    </article>
+
+  </div>
+</section>
+
+<!-- GALERÍA ELEGANTE -->
+<section id="disenos">
+  <div class="prose">
+    <span class="eyebrow">Ideas de diseño</span>
+    <h2>Rampas que se ven como parte de la casa</h2>
+    <p>Una rampa no tiene que verse como un añadido de hospital. Con el material correcto puede verse como un porche, una terraza o un camino de jardín, y seguir cumpliendo todas las medidas de seguridad. Estas son ilustraciones de referencia hechas para esta guía; cada ficha tiene un enlace para ver fotos reales de ese estilo.</p>
+  </div>
+
+  <div class="gallery">
+    <article class="look">
+      <div class="scene" data-scene="jardin"></div>
+      <div class="look-body">
+        <h3>Camino de jardín en pendiente suave</h3>
+        <p>En lugar de una rampa, se levanta el terreno con tierra y un muro bajo de piedra, y se hace un camino de adoquín que sube poco a poco hasta la puerta. Con pendiente de 1:20 o menos se considera un camino y <strong>no necesita pasamanos</strong>.</p>
+        <dl class="specs">
+          <dt>Materiales</dt><dd>Adoquín o concreto estampado, muro de piedra, plantas</dd>
+          <dt>Casa ideal</dt><dd>Cualquier casa con jardín frontal amplio</dd>
+          <dt>Mantenimiento</dt><dd>Bajo; cuidar las plantas</dd>
+          <dt>Costo</dt><dd class="cost">$$<span>$$</span></dd>
+        </dl>
+        <a href="https://www.google.com/search?tbm=isch&amp;q=sloped+garden+walkway+accessible+entrance+no+ramp" target="_blank" rel="noopener">Ver fotos reales de este estilo</a>
+      </div>
+    </article>
+
+    <article class="look">
+      <div class="scene" data-scene="ladrillo"></div>
+      <div class="look-body">
+        <h3>Ladrillo con barandal de herrería</h3>
+        <p>Muros de ladrillo del mismo color que la casa, tapa de piedra caliza y barandal negro de hierro forjado. Es el estilo que mejor combina con los bungalows y edificios de ladrillo de Chicago. Se ve como si siempre hubiera estado ahí.</p>
+        <dl class="specs">
+          <dt>Materiales</dt><dd>Ladrillo, piedra caliza, concreto, hierro con pintura en polvo</dd>
+          <dt>Casa ideal</dt><dd>Bungalow de ladrillo, edificio de 2 o 3 pisos</dd>
+          <dt>Mantenimiento</dt><dd>Muy bajo; no usar sal de roca</dd>
+          <dt>Costo</dt><dd class="cost">$$$$</dd>
+        </dl>
+        <a href="https://www.google.com/search?tbm=isch&amp;q=brick+wheelchair+ramp+wrought+iron+railing+house" target="_blank" rel="noopener">Ver fotos reales de este estilo</a>
+      </div>
+    </article>
+
+    <article class="look">
+      <div class="scene" data-scene="moderno"></div>
+      <div class="look-body">
+        <h3>Concreto con barandal de vidrio</h3>
+        <p>Concreto liso con paneles de vidrio templado y pasamanos de acero inoxidable. Luces LED bajo el pasamanos iluminan el piso de noche, lo que ayuda mucho a personas con baja visión. Se ve limpio y moderno.</p>
+        <dl class="specs">
+          <dt>Materiales</dt><dd>Concreto escobillado, vidrio templado, acero inoxidable, LED</dd>
+          <dt>Casa ideal</dt><dd>Casa moderna o remodelada</dd>
+          <dt>Mantenimiento</dt><dd>Bajo; limpiar el vidrio</dd>
+          <dt>Costo</dt><dd class="cost">$$$<span>$</span></dd>
+        </dl>
+        <a href="https://www.google.com/search?tbm=isch&amp;q=modern+concrete+accessible+ramp+glass+railing+home" target="_blank" rel="noopener">Ver fotos reales de este estilo</a>
+      </div>
+    </article>
+
+    <article class="look">
+      <div class="scene" data-scene="porche"></div>
+      <div class="look-body">
+        <h3>Porche de madera compuesta</h3>
+        <p>La rampa se construye como una extensión del porche, con barandal blanco de balaustres, faldón de celosía que esconde la estructura y jardineras al frente. La madera compuesta no se pudre ni se astilla.</p>
+        <dl class="specs">
+          <dt>Materiales</dt><dd>Madera compuesta, barandal de PVC o aluminio blanco, celosía</dd>
+          <dt>Casa ideal</dt><dd>Casa de madera, estilo victoriano o de campo</dd>
+          <dt>Mantenimiento</dt><dd>Bajo; lavar una vez al año</dd>
+          <dt>Costo</dt><dd class="cost">$$$<span>$</span></dd>
+        </dl>
+        <a href="https://www.google.com/search?tbm=isch&amp;q=composite+porch+wheelchair+ramp+white+railing+lattice" target="_blank" rel="noopener">Ver fotos reales de este estilo</a>
+      </div>
+    </article>
+
+    <article class="look">
+      <div class="scene" data-scene="aluminio"></div>
+      <div class="look-body">
+        <h3>Aluminio color bronce con faldón</h3>
+        <p>La rampa modular removible (modelo E) pintada de bronce o negro, con paneles que tapan las patas y arbustos al frente. Es la opción elegante para quien renta con vale: se ve bien y se puede llevar al mudarse.</p>
+        <dl class="specs">
+          <dt>Materiales</dt><dd>Aluminio con pintura en polvo, paneles de faldón, arbustos</dd>
+          <dt>Casa ideal</dt><dd>Casas rentadas, greystone, cualquier fachada</dd>
+          <dt>Mantenimiento</dt><dd>Muy bajo; drena agua y nieve</dd>
+          <dt>Costo</dt><dd class="cost">$$<span>$$</span></dd>
+        </dl>
+        <a href="https://www.google.com/search?tbm=isch&amp;q=bronze+aluminum+modular+wheelchair+ramp+skirting+landscaping" target="_blank" rel="noopener">Ver fotos reales de este estilo</a>
+      </div>
+    </article>
+
+    <article class="look">
+      <div class="scene" data-scene="cedro"></div>
+      <div class="look-body">
+        <h3>Cedro natural con pérgola</h3>
+        <p>Madera de cedro teñida en tono cálido, barandal de cable de acero y una pérgola sobre el descanso de la puerta. La pérgola da sombra y un lugar para descansar antes de entrar. Se siente como una terraza.</p>
+        <dl class="specs">
+          <dt>Materiales</dt><dd>Cedro o madera tratada teñida, cable de acero inoxidable</dd>
+          <dt>Casa ideal</dt><dd>Casa con patio, estilo rústico o contemporáneo</dd>
+          <dt>Mantenimiento</dt><dd>Medio; sellar cada 2–3 años</dd>
+          <dt>Costo</dt><dd class="cost">$$<span>$$</span></dd>
+        </dl>
+        <a href="https://www.google.com/search?tbm=isch&amp;q=cedar+wheelchair+ramp+cable+railing+pergola" target="_blank" rel="noopener">Ver fotos reales de este estilo</a>
+      </div>
+    </article>
+  </div>
+
+  <p class="muted gs-3">Costo relativo entre estos estilos: $ más económico, $$$$ más caro. Pida al menos tres cotizaciones a contratistas con licencia.</p>
+
+  <div class="panel">
+    <h3>Trucos para que cualquier rampa se vea elegante</h3>
+    <ul class="tips">
+      <li><strong>Repite los materiales de la casa</strong>Si la casa es de ladrillo, use ladrillo o piedra. Si es de madera, siga el color de las ventanas y el porche.</li>
+      <li><strong>Esconde la estructura</strong>Un faldón de celosía, paneles o madera tapa los postes y la parte de abajo, que es lo que más afea.</li>
+      <li><strong>Usa plantas</strong>Arbustos y jardineras a lo largo de la rampa la integran al jardín. Elija plantas que no crezcan hacia el paso.</li>
+      <li><strong>Barandal negro o bronce</strong>Los colores oscuros se notan menos que el aluminio natural y combinan con casi cualquier fachada.</li>
+      <li><strong>Pendiente más suave</strong>Con 1:20 la rampa se vuelve un camino sin pasamanos y se ve menos "rampa". Necesita más espacio.</li>
+      <li><strong>Luz empotrada</strong>Luces en los postes o bajo el pasamanos se ven elegantes y son necesarias para la seguridad de noche.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- DISCAPACIDADES -->
+<section id="discapacidades">
+  <div class="prose">
+    <span class="eyebrow">Paso 4</span>
+    <h2>Ajustes según el tipo de discapacidad</h2>
+    <p>Las medidas mínimas son el piso, no la meta. Estos ajustes hacen que la rampa sirva de verdad a la persona que vive en la casa.</p>
+  </div>
+  <div class="needs">
+    <div class="need"><h3>Silla de ruedas manual</h3><ul>
+      <li>Pendiente 1:16 o más suave: subir 1:12 sin ayuda cansa mucho.</li>
+      <li>Descansos frecuentes para recuperar fuerza.</li>
+      <li>Superficie lisa y firme, sin juntas abiertas mayores de ½".</li>
+    </ul></div>
+    <div class="need"><h3>Silla eléctrica o scooter</h3><ul>
+      <li>Ancho de 42"–48": los scooters son más anchos y largos.</li>
+      <li>Descansos de giro más grandes (60"×72" o más) porque los scooters giran en círculo amplio.</li>
+      <li>Estructura para soportar 300+ lb de equipo más la persona.</li>
+    </ul></div>
+    <div class="need"><h3>Andadera, bastón o muletas</h3><ul>
+      <li>Pasamanos en ambos lados siempre, aunque la rampa sea corta.</li>
+      <li>Para algunas personas es más fácil subir escalones con pasamanos que una rampa larga. Pregunte a la persona.</li>
+      <li>Superficie antideslizante sin rejillas donde se atore la punta del bastón.</li>
+    </ul></div>
+    <div class="need"><h3>Baja visión o ceguera</h3><ul>
+      <li>Franja de color contrastante (amarillo) al inicio y al final de cada tramo y en los bordes.</li>
+      <li>Iluminación en toda la rampa, con sensor de movimiento.</li>
+      <li>Pasamanos continuos sin interrupciones y nada que sobresalga hacia el paso.</li>
+    </ul></div>
+    <div class="need"><h3>Adultos mayores o poca resistencia</h3><ul>
+      <li>Pendiente 1:16 a 1:20 (problemas cardíacos, respiratorios, artritis).</li>
+      <li>Un banco o asiento en el descanso intermedio.</li>
+      <li>Pasamanos fáciles de agarrar, redondos de 1½".</li>
+    </ul></div>
+    <div class="need"><h3>Niños o personas de baja estatura</h3><ul>
+      <li>Segundo pasamanos a 28" de alto además del de 34"–38".</li>
+      <li>Al menos 9" de separación vertical entre los dos pasamanos.</li>
+    </ul></div>
+    <div class="need"><h3>Discapacidad cognitiva o intelectual</h3><ul>
+      <li>Diseño recto y simple cuando haya espacio (modelo A).</li>
+      <li>Colores y señales claras que indiquen la entrada.</li>
+    </ul></div>
+    <div class="need"><h3>Clima de Chicago (todos)</h3><ul>
+      <li>Superficie que drene agua y no forme hielo: rejilla de aluminio o concreto escobillado.</li>
+      <li>No usar sal de roca en madera ni aluminio; usar arena o deshielo seguro.</li>
+      <li>Techo o toldo sobre el descanso de la puerta si es posible.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- CONSTRUCCIÓN -->
+<section id="construccion">
+  <div class="prose">
+    <span class="eyebrow">Paso 5</span>
+    <h2>Cómo construir una rampa de madera (modelos A, B o C)</h2>
+  </div>
+  <div class="two">
+    <div class="panel">
+      <h3>Materiales por cada 10 pies de rampa (ancho 48")</h3>
+      <ul class="list">
+        <li><span class="mono">4</span> postes de madera tratada 4×4 (clasificada para contacto con suelo)</li>
+        <li><span class="mono">4</span> zapatas de concreto bajo la línea de congelamiento</li>
+        <li><span class="mono">3</span> largueros 2×8 de 10' (a 16" entre centros o menos)</li>
+        <li><span class="mono">~22</span> tablas de piso 5/4×6 de 48", o triplay tratado de ¾"</li>
+        <li><span class="mono">2</span> pasamanos redondos de 1½" de diámetro con soportes</li>
+        <li><span class="mono">2</span> bordillos 2×4 a lo largo, como protección de borde</li>
+        <li>Tornillos galvanizados o de acero inoxidable, herrajes para vigas</li>
+        <li>Pintura o cinta antideslizante para exterior</li>
+      </ul>
+      <p class="muted gs-3">Cantidades aproximadas. Un contratista hará el cálculo exacto según el sitio.</p>
+    </div>
+    <div class="panel">
+      <h3>Pasos de construcción</h3>
+      <ol class="g-steps">
+        <li>Mida la elevación total y el espacio. Use la calculadora para elegir el modelo.</li>
+        <li>Solicite el permiso de construcción en el Departamento de Edificios de Chicago (o de su municipio).</li>
+        <li>Marque el trazo con estacas e hilo, incluidos los descansos.</li>
+        <li>Excave y vacíe las zapatas a <strong>42" de profundidad</strong>, la línea de congelamiento de Chicago.</li>
+        <li>Instale los postes, nivele y construya primero el descanso superior junto a la puerta.</li>
+        <li>Coloque los largueros con la pendiente exacta y revise con nivel que no haya inclinación lateral.</li>
+        <li>Fije el piso dejando juntas de ¼" para drenaje.</li>
+        <li>Instale bordillos, pasamanos con sus extensiones de 12" y la superficie antideslizante.</li>
+        <li>Pida la inspección final de la ciudad y, si es vivienda Sección 8, avise a la autoridad de vivienda para la inspección de la unidad.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 8 -->
+<section id="seccion8">
+  <div class="prose">
+    <span class="eyebrow">Paso 6</span>
+    <h2>Cómo solicitar la rampa en vivienda Sección 8</h2>
+    <p>La Ley de Vivienda Justa (Fair Housing Act) da a las personas con discapacidad el derecho de pedir una <strong>modificación razonable</strong> a la vivienda, como una rampa. Quién paga depende del tipo de vivienda.</p>
+  </div>
+  <div class="two">
+    <div class="panel">
+      <h3>Quién paga</h3>
+      <ul class="list">
+        <li><strong>Vivienda pública o Sección 8 basada en proyecto</strong> (el edificio recibe fondos de HUD): aplica la Sección 504. En general el proveedor de vivienda paga la modificación, salvo que demuestre una carga financiera excesiva.</li>
+        <li><strong>Vale de vivienda (Housing Choice Voucher) en casa privada:</strong> el propietario debe permitir la rampa, pero el vale no paga obras y normalmente el costo lo cubre el inquilino o un programa de ayuda (ver la lista abajo). Según las reglas de HUD, el propietario en general solo puede pedir que se restauren los cambios hechos <em>dentro</em> de la vivienda, no una rampa exterior.</li>
+        <li><strong>La autoridad de vivienda también puede ayudar:</strong> dar más tiempo para buscar una unidad accesible, ayudar a encontrarla o aprobar una renta más alta como acomodo razonable.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Carta modelo para el propietario o la autoridad de vivienda</h3>
+      <div class="letter" id="letter">Fecha: ____________
+
+A: [Nombre del propietario o de la Autoridad de Vivienda de Chicago]
+Dirección de la unidad: ____________
+
+Asunto: Solicitud de modificación razonable — rampa de acceso
+
+Soy inquilino(a) con vale de vivienda Sección 8. Yo (o un miembro de mi hogar) tengo una discapacidad que limita mi capacidad para usar escalones. Conforme a la Ley de Vivienda Justa y, si aplica, la Sección 504, solicito autorización para instalar una rampa de acceso en la entrada de la unidad.
+
+La rampa cumplirá con las Normas ADA (pendiente máxima 1:12, ancho libre de 36", pasamanos y descansos), será instalada por un contratista con licencia y con el permiso de la ciudad.
+
+Adjunto una carta de mi proveedor de salud que confirma la necesidad. Le pido una respuesta por escrito en un plazo de 10 días hábiles.
+
+Atentamente,
+____________
+Teléfono: ____________</div>
+      <button type="button" id="copyBtn">Copiar carta</button>
+      <span class="muted gs-4" id="copyMsg"></span>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>Programas que pueden pagar la rampa total o parcialmente</h3>
+    <p class="muted gs-5">Estar en Sección 8 ayuda porque ya demuestra bajos ingresos, pero cada programa tiene su propia solicitud. Muchos tienen lista de espera o un número limitado de casos al año: conviene solicitar pronto y en varios a la vez.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Programa</th><th>Quién puede calificar</th><th>Qué ofrece</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Home Accessibility Program (HAP)</strong><br><span class="muted">Departamento de Vivienda de Chicago · llamar al 311</span></td><td>Personas de bajos ingresos con discapacidad, dueños o inquilinos (el inquilino necesita permiso del propietario)</td><td>Modificaciones sin costo, como rampas, barandales y baños accesibles</td></tr>
+          <tr><td><strong>Access Living</strong><br><span class="muted">Centro de vida independiente de Chicago</span></td><td>Cualquier persona con discapacidad</td><td>Ayuda para hacer solicitudes, escribir al propietario y encontrar fondos</td></tr>
+          <tr><td><strong>Acomodo Razonable de CHA</strong><br><span class="muted">Autoridad de Vivienda de Chicago</span></td><td>Residentes de vivienda pública y participantes del programa de vales</td><td>En vivienda pública, CHA paga la modificación. Con vale, ayuda a encontrar unidades accesibles y aprueba ajustes al vale</td></tr>
+          <tr><td><strong>Home Services Program</strong><br><span class="muted">IDHS, División de Servicios de Rehabilitación de Illinois</span></td><td>Personas con Medicaid y discapacidad que necesitan servicios en casa</td><td>Puede cubrir modificaciones al hogar</td></tr>
+          <tr><td><strong>HISA y SAH</strong><br><span class="muted">Departamento de Asuntos de Veteranos (VA)</span></td><td>Veteranos con discapacidad</td><td>Subvenciones para adaptar la vivienda</td></tr>
+          <tr><td><strong>Rebuilding Together Metro Chicago · Habitat for Humanity Chicago</strong></td><td>Sobre todo dueños de casa de bajos ingresos, incluso quienes compraron con el programa de compra de vivienda de Sección 8</td><td>Reparaciones y modificaciones gratuitas o de bajo costo</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Pasos recomendados</h3>
+    <ol class="g-steps">
+      <li>Llamar al 311 y pedir el Home Accessibility Program del Departamento de Vivienda.</li>
+      <li>Contactar a Access Living para que ayuden con la solicitud.</li>
+      <li>Si vive en vivienda de CHA, pedir por escrito un acomodo razonable a CHA con la carta modelo de arriba.</li>
+      <li>Si renta con vale en casa privada, pedir el permiso del propietario por escrito antes de que llegue la ayuda.</li>
+    </ol>
+  </div>
+  <div class="callout">
+    <p><strong>Antes de construir:</strong> obtenga la autorización por escrito del propietario o de la autoridad de vivienda, el permiso de la ciudad y, si la vivienda es subsidiada, confirme con su especialista de Sección 8 que la rampa no afectará la inspección de la unidad.</p>
+    <p>Los nombres de programas y las reglas de pago pueden cambiar. Verifique los requisitos actuales con la autoridad de vivienda y el Departamento de Edificios antes de empezar.</p>
+  </div>
+</section>
+
+<footer>
+  Esta guía resume las Normas ADA 2010 (§405 y §505) y las reglas de HUD para vivienda. Es una herramienta de planeación y no reemplaza los planos de un arquitecto, ingeniero o contratista con licencia, ni la revisión del código local.
+  <br><br>Lo que escribe en la calculadora se queda en su navegador y no se envía a ningún lado. <a href="/cotizar">Pida su cotización gratis</a> cuando esté listo.
+</footer>
+
+</div>
+</main>
+<footer id="site-footer" class="site-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "rampa-facil",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Rampa Fácil: diseño, permisos e instalación de rampas accesibles en Chicago.",
+  "main": "server/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test test/",
+    "build:img": "node scripts/build-images.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.5",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "pg-mem": "^3.0.4"
+  }
+}

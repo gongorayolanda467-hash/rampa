@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Rampa de concreto con barandal de vidrio frente a una casa moderna">
+<title>Rampa de concreto con barandal de vidrio frente a una casa moderna</title>
+<defs>
+<pattern id="moderno-brick" width="20" height="10" patternUnits="userSpaceOnUse"><rect width="20" height="10" fill="#9A4B33"/><path d="M0 0H20M0 5H20M0 10H20M5 0V5M15 5V10" stroke="#D9C8B4" stroke-width="1"/></pattern>
+<pattern id="moderno-brick2" width="20" height="10" patternUnits="userSpaceOnUse"><rect width="20" height="10" fill="#A65A3E"/><path d="M0 0H20M0 5H20M0 10H20M5 0V5M15 5V10" stroke="#E2D3C0" stroke-width="1"/></pattern>
+<pattern id="moderno-stone" width="30" height="14" patternUnits="userSpaceOnUse"><rect width="30" height="14" fill="#BDB6A8"/><path d="M0 0H30M0 7H30M10 0V7M25 7V14" stroke="#9C958A" stroke-width="1"/></pattern>
+<pattern id="moderno-wall" width="30" height="16" patternUnits="userSpaceOnUse"><rect width="30" height="16" fill="#8E8A7E"/><path d="M0 0H30M0 8H30M12 0V8M27 8V16" stroke="#6F6B61" stroke-width="1"/></pattern>
+<pattern id="moderno-clap" width="10" height="9" patternUnits="userSpaceOnUse"><rect width="10" height="9" fill="#9DBBCF"/><path d="M0 8.5H10" stroke="#7E9DB2" stroke-width="1"/></pattern>
+<pattern id="moderno-modern" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#5F6670"/><path d="M9.5 0V10" stroke="#4D535B" stroke-width="1"/></pattern>
+<pattern id="moderno-lattice" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#4E544A"/><path d="M0 0L10 10M10 0L0 10" stroke="#F4F2EC" stroke-width="2.2"/></pattern>
+<pattern id="moderno-skirt" width="16" height="10" patternUnits="userSpaceOnUse"><rect width="16" height="10" fill="#4B3B2E"/><path d="M15.5 0V10" stroke="#382C22" stroke-width="1"/></pattern>
+<pattern id="moderno-cedar" width="10" height="7" patternUnits="userSpaceOnUse"><rect width="10" height="7" fill="#B07A4C"/><path d="M0 6.5H10" stroke="#8A5C36" stroke-width="1"/></pattern>
+<linearGradient id="moderno-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9DCE8"/><stop offset="1" stop-color="#EEF2EF"/></linearGradient></defs>
+<rect width="480" height="300" fill="url(#moderno-sky)"/>
+<ellipse cx="120" cy="262" rx="150" ry="60" fill="#C5D4C0"/>
+<rect x="300" y="44" width="180" height="218" fill="url(#moderno-modern)"/><rect x="294" y="36" width="192" height="12" fill="#2F343A"/><rect x="318" y="114" width="40" height="86" fill="#2F343A"/><rect x="322" y="118" width="32" height="82" fill="#B8763E"/>
+<circle cx="348" cy="160" r="2" fill="#D9B45A"/>
+<rect x="392" y="96" width="62" height="66" fill="#2F343A"/><rect x="397" y="101" width="52" height="56" fill="#F3E3B0"/>
+<path d="M423 101V157M397 129H449" stroke="#2F343A" stroke-width="3"/><polygon points="40,262 240,200 300,200 300,262" fill="#B9B7B1"/><path d="M120 262 V237.2 M200 262 V212.4" stroke="#A3A19B" stroke-width="1"/><path d="M40 262 L240 200 H300" stroke="#D3D1CB" stroke-width="5" fill="none"/><polygon points="42,259 138,228 138,201 42,232" fill="#BFE0EC" fill-opacity=".55" stroke="#8FB3C2" stroke-width="1"/><polygon points="142,228 238,197 238,170 142,201" fill="#BFE0EC" fill-opacity=".55" stroke="#8FB3C2" stroke-width="1"/><polygon points="242,197 298,197 298,170 242,170" fill="#BFE0EC" fill-opacity=".55" stroke="#8FB3C2" stroke-width="1"/><path d="M28 228 H40 L240 166 H300" stroke="#C7CDD2" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M40 232 L240 170 H300" stroke="#FFE7A3" stroke-width="2" fill="none" opacity=".9"/><rect x="20" y="232" width="16" height="30" fill="#3E4A3F"/><circle cx="23.8" cy="230.5" r="5.25" fill="#6B8F5E"/><circle cx="32.2" cy="230.5" r="5.25" fill="#6B8F5E"/><circle cx="28" cy="227" r="7" fill="#6B8F5E"/>
+<rect x="0" y="262" width="480" height="38" fill="#7E9A6A"/>
+<rect x="0" y="276" width="480" height="24" fill="#CBC7BE"/>
+<path d="M0 276H480" stroke="#B3AFA6"/>
+</svg>

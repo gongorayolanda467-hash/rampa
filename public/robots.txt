@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /api/
+Disallow: /panel
+Disallow: /admin
+Disallow: /cotizar
+Sitemap: https://rampa-facil.onrender.com/sitemap.xml
