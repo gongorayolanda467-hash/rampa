@@ -52,4 +52,10 @@ function requireAdmin(req, res, next) {
   next();
 }
 
-module.exports = { setSession, clearSession, publicUser, loadUser, requireAuth, requireAdmin };
+function requireFunder(req, res, next) {
+  if (!req.user) return res.status(401).json({ error: 'Inicie sesión para continuar.' });
+  if (req.user.role !== 'funder') return res.status(403).json({ error: 'Esta sección es para cuentas de financiador.' });
+  next();
+}
+
+module.exports = { setSession, clearSession, publicUser, loadUser, requireAuth, requireAdmin, requireFunder };

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quién paga mi rampa · Rampa Fácil</title>
+<meta name="description" content="Descubra en un minuto qué programas pueden pagar su rampa en Chicago: CHA, Sección 504, HAP, IDHS, VA y más. Guía paso a paso para aplicar.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1A5FD6">
+<meta property="og:site_name" content="Rampa Fácil">
+<meta property="og:title" content="Quién paga mi rampa · Rampa Fácil">
+<meta property="og:description" content="Descubra en un minuto qué programas pueden pagar su rampa en Chicago: CHA, Sección 504, HAP, IDHS, VA y más. Guía paso a paso para aplicar.">
+<meta property="og:image" content="https://rampa-facil.onrender.com/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/css/app.css">
+<script src="/js/common.js" defer></script>
+<script src="/js/ayuda.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header id="site-header" class="site-header"></header>
+
+<main id="main">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Guía para conseguir quién pague</span>
+        <h1>¿Quién puede <em>pagar</em> tu rampa?</h1>
+        <p class="lead">Responde 4 preguntas y te mostramos los programas que te aplican, qué documentos necesitas y cómo pedirlos, paso a paso.</p>
+        <div class="hero-ctas"><a class="btn btn-signal btn-lg" href="#elegibilidad">Ver a qué califico <span class="arrow" aria-hidden="true">→</span></a></div>
+      </div>
+      <figure class="hero-figure"><div class="hero-frame"><img src="/img/jardin.svg" alt="Ilustración de un camino accesible frente a una casa" width="480" height="300"></div></figure>
+    </div>
+  </section>
+
+  <section class="section" id="elegibilidad">
+    <div class="container wizard">
+      <form class="wizard-main" id="elig-form" novalidate>
+        <div class="step-title"><span class="eyebrow">En un minuto</span><h2>Tu situación</h2></div>
+        <fieldset class="field"><legend>1. ¿Dónde vives?</legend><div class="choices wide" id="elig-housing"></div></fieldset>
+        <div class="field"><label for="elig-zip">2. Código postal</label><input id="elig-zip" name="zip" inputmode="numeric" maxlength="5" placeholder="60623"></div>
+        <fieldset class="field"><legend>3. Marca lo que aplique</legend>
+          <div class="choices wide">
+            <label class="choice"><input type="checkbox" name="low_income" value="true"><span class="t">Ingresos bajos</span><span class="d">Sección 8, SNAP, SSI o similar.</span></label>
+            <label class="choice"><input type="checkbox" name="medicaid" value="true"><span class="t">Tengo Medicaid</span></label>
+            <label class="choice"><input type="checkbox" name="veteran" value="true"><span class="t">Soy veterano</span></label>
+          </div>
+        </fieldset>
+      </form>
+      <aside class="aside">
+        <div class="estimate">
+          <span class="eyebrow">Resultado</span>
+          <h3 id="elig-count">Elige tu tipo de vivienda</h3>
+          <p class="note">Esta guía orienta; la decisión final la toma cada programa.</p>
+          <a class="btn btn-signal" href="/cotizar">Pedir mi rampa</a>
+        </div>
+      </aside>
+    </div>
+    <div class="container"><div class="spacer"></div><div class="grid grid-2" id="program-list"></div></div>
+  </section>
+
+  <section class="section section-tint" id="pasos">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Paso a paso</span><h2>Cómo conseguir que te construyan tu rampa</h2></div>
+      <ol class="steps">
+        <li><h3>Pide tu rampa</h3><p>Crea tu cuenta y llena la solicitud. Recibes un estimado y la lista de programas que te aplican.</p></li>
+        <li><h3>Junta tus documentos</h3><p>Identificación, comprobantes de ingresos, una carta de tu médico y, si rentas, el permiso del propietario.</p></li>
+        <li><h3>Aplica a los programas</h3><p>Usa la cotización por escrito que te damos. Puedes aplicar a varios a la vez.</p></li>
+        <li><h3>Acepta quién paga</h3><p>En tu panel ves las ofertas de financiadores y las aprobaciones. Tú eliges.</p></li>
+        <li><h3>Construimos</h3><p>Programamos la obra, la construimos con normas ADA y queda lista para la inspección.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="carta">
+    <div class="container split">
+      <div class="stack-lg">
+        <span class="eyebrow">Carta modelo</span>
+        <h2>Pide la rampa por escrito</h2>
+        <p class="lead">Úsala para tu propietario, CHA o el administrador del edificio. Guarda una copia y anota la fecha de entrega.</p>
+        <button class="btn btn-primary" type="button" id="copy-letter">Copiar carta</button>
+      </div>
+      <pre class="card letter" id="letter">Fecha: ____________
+
+A: [Nombre del propietario, CHA o administrador]
+Dirección de la unidad: ____________
+
+Asunto: Solicitud de modificación razonable — rampa de acceso
+
+Yo (o un miembro de mi hogar) tengo una discapacidad que limita el uso de escalones. Conforme a la Ley de Vivienda Justa y, si aplica, la Sección 504, solicito autorización para instalar una rampa de acceso en la entrada de la unidad.
+
+La rampa cumplirá las Normas ADA (pendiente máxima 1:12, ancho libre de 36", descansos y pasamanos), la instalará un contratista con licencia y contará con permiso de la ciudad.
+
+Adjunto una carta de mi proveedor de salud. Le pido una respuesta por escrito en un plazo de 10 días hábiles.
+
+Atentamente,
+____________
+Teléfono: ____________</pre>
+    </div>
+  </section>
+</main>
+<div class="mobile-cta"><a class="btn btn-signal" href="/cotizar">Pedir mi rampa</a></div>
+<footer id="site-footer" class="site-footer"></footer>
+</body>
+</html>

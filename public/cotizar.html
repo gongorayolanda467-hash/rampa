@@ -2,15 +2,16 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pedir cotización · Rampa Fácil</title>
-<meta name="description" content="Pida una cotización gratis para su rampa accesible en Chicago.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pedir mi rampa · Rampa Fácil</title>
+<meta name="description" content="Pida su rampa gratis, reciba un estimado al instante y descubra qué programas se la pueden pagar.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0F3D70">
+<meta name="theme-color" content="#1A5FD6">
 <meta property="og:site_name" content="Rampa Fácil">
-<meta property="og:title" content="Pedir cotización · Rampa Fácil">
-<meta property="og:description" content="Pida una cotización gratis para su rampa accesible en Chicago.">
+<meta property="og:title" content="Pedir mi rampa · Rampa Fácil">
+<meta property="og:description" content="Pida su rampa gratis, reciba un estimado al instante y descubra qué programas se la pueden pagar.">
 <meta property="og:image" content="https://rampa-facil.onrender.com/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,31 +24,81 @@
 <a class="skip" href="#main">Saltar al contenido</a>
 <header id="site-header" class="site-header"></header>
 
-<main id="main" class="page container">
-  <div class="panel-head">
-    <div class="stack">
-      <span class="eyebrow">Cotización gratis</span>
-      <h1>Cuéntenos sobre su entrada</h1>
-      <p class="muted">Con esta información preparamos la visita. Si no sabe algún dato, elija la opción más cercana.</p>
+<main id="main" class="page">
+  <div class="container">
+    <div class="panel-head">
+      <div class="stack">
+        <span class="eyebrow">Solicitud gratis · 3 minutos</span>
+        <h1>Pidamos tu rampa</h1>
+        <p class="lead">Si no sabes algún dato, elige la opción más cercana. Lo confirmamos en la visita.</p>
+      </div>
+    </div>
+    <div id="quote-root"></div>
+    <div class="wizard hidden" id="wizard">
+      <form class="wizard-main" id="quote-form" novalidate>
+        <ol class="progress" aria-label="Progreso">
+          <li data-p="1">1. Tu entrada</li><li data-p="2">2. Quién la usará</li><li data-p="3">3. Dónde y cómo</li>
+        </ol>
+
+        <section class="stack-lg" data-step="1">
+          <div class="step-title"><h2>¿Cómo es tu entrada?</h2><p class="muted">Mide del suelo al piso de la puerta. Tres escalones son unas 21–24 pulgadas.</p></div>
+          <div class="field"><label for="rise_in">Altura de la entrada (pulgadas)</label><input id="rise_in" name="rise_in" type="number" min="1" max="120" step="1" required inputmode="numeric" value="24"></div>
+          <fieldset class="field"><legend>Modelo de rampa</legend><div class="choices" id="product-choices"></div></fieldset>
+          <fieldset class="field"><legend>Acabado</legend><div class="choices" id="finish-choices"></div></fieldset>
+        </section>
+
+        <section class="stack-lg hidden" data-step="2">
+          <div class="step-title"><h2>¿Quién usará la rampa?</h2><p class="muted">Así la diseñamos a su medida y vemos qué programas te aplican.</p></div>
+          <fieldset class="field"><legend>Apoyo de movilidad</legend><div class="choices" id="mobility-choices"></div></fieldset>
+          <fieldset class="field"><legend>Tipo de vivienda</legend><div class="choices wide" id="housing-choices"></div></fieldset>
+          <fieldset class="field"><legend>Marca lo que aplique (ayuda a encontrar quién paga)</legend>
+            <div class="choices wide">
+              <label class="choice"><input type="checkbox" name="low_income" value="true"><span class="t">Ingresos bajos</span><span class="d">Por ejemplo, si tiene Sección 8, SNAP o SSI.</span></label>
+              <label class="choice"><input type="checkbox" name="medicaid" value="true"><span class="t">Tiene Medicaid</span><span class="d">Puede aplicar al programa de IDHS.</span></label>
+              <label class="choice"><input type="checkbox" name="veteran" value="true"><span class="t">Es veterano</span><span class="d">Puede aplicar a subvenciones del VA.</span></label>
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="stack-lg hidden" data-step="3">
+          <div class="step-title"><h2>¿Dónde y cómo te contactamos?</h2><p class="muted">Tu dirección solo la ve el equipo de Rampa Fácil.</p></div>
+          <div class="form-grid">
+            <div class="field"><label for="address">Dirección de la vivienda</label><input id="address" name="address" autocomplete="street-address" required maxlength="200"></div>
+            <div class="field"><label for="zip">Código postal</label><input id="zip" name="zip" autocomplete="postal-code" required inputmode="numeric" maxlength="5"></div>
+          </div>
+          <p class="alert alert-info hidden" id="zip-note">Ese código postal parece estar fuera de nuestra zona. Envía la solicitud y te confirmamos si podemos atenderte.</p>
+          <fieldset class="field"><legend>¿Cómo prefieres que te contactemos?</legend><div class="segmented" id="contact-choices"></div></fieldset>
+          <div class="field"><label for="notes">Notas (opcional)</label><textarea id="notes" name="notes" maxlength="2000" placeholder="Por ejemplo: la entrada es lateral, hay un escalón en la puerta, la necesitamos antes del invierno."></textarea></div>
+          <label class="choice"><input type="checkbox" name="share_consent" value="true" checked><span class="t">Compartir mi caso con financiadores verificados</span><span class="d">Solo ven el código postal, la altura, el modelo, el tipo de vivienda y el estimado. Nunca tu nombre, dirección ni teléfono. Puedes cambiarlo después.</span></label>
+          <dl class="summary" id="summary"></dl>
+        </section>
+
+        <div data-status class="hidden"></div>
+        <div class="step-actions">
+          <button class="btn btn-ghost" type="button" id="back">← Atrás</button>
+          <button class="btn btn-primary" type="button" id="next">Siguiente <span class="arrow" aria-hidden="true">→</span></button>
+          <button class="btn btn-signal hidden" type="submit" id="submit">Enviar mi solicitud</button>
+        </div>
+      </form>
+      <aside class="aside">
+        <div class="estimate" aria-live="polite">
+          <span class="eyebrow">Tu estimado</span>
+          <h3 id="est-range">—</h3>
+          <dl>
+            <dt>Largo aproximado</dt><dd id="est-feet">—</dd>
+            <dt>Tramos</dt><dd id="est-seg">—</dd>
+            <dt>Pasamanos</dt><dd id="est-rails">—</dd>
+          </dl>
+          <p class="note">Precio orientativo con pendiente 1:12. El precio final se da por escrito después de la visita gratis.</p>
+        </div>
+        <div class="trust">
+          <strong>Programas que te pueden ayudar</strong>
+          <div id="est-programs" class="muted">Completa el paso 2 para verlos.</div>
+          <a href="/ayuda">Ver la guía completa</a>
+        </div>
+      </aside>
     </div>
   </div>
-  <div id="quote-root"><div class="loading" role="status"><span class="spinner" aria-hidden="true"></span>Cargando el formulario…</div></div>
-  <form class="card form hidden" id="quote-form" novalidate>
-    <div class="form-grid">
-      <div class="field"><label for="product">Modelo de rampa</label><select id="product" name="product" required></select><span class="hint"><a href="/#modelos">Ver los modelos</a></span></div>
-      <div class="field"><label for="finish">Acabado</label><select id="finish" name="finish" required></select><span class="hint"><a href="/#disenos">Ver los diseños</a></span></div>
-      <div class="field"><label for="rise_in">Altura de la entrada (pulgadas)</label><input id="rise_in" name="rise_in" type="number" min="1" max="120" step="1" required inputmode="numeric"><span class="hint">Del suelo al piso de la puerta. 3 escalones son unas 21–24 pulgadas.</span></div>
-      <div class="field"><label for="mobility">¿Quién usará la rampa?</label><select id="mobility" name="mobility" required></select></div>
-      <div class="field"><label for="housing">Tipo de vivienda</label><select id="housing" name="housing" required></select><span class="hint">Nos ayuda a ver qué programas de ayuda le aplican.</span></div>
-      <div class="field"><label for="contact_pref">¿Cómo prefiere que le contactemos?</label><select id="contact_pref" name="contact_pref" required></select></div>
-      <div class="field"><label for="address">Dirección de la vivienda</label><input id="address" name="address" autocomplete="street-address" required maxlength="200"></div>
-      <div class="field"><label for="zip">Código postal</label><input id="zip" name="zip" autocomplete="postal-code" required inputmode="numeric" maxlength="5" pattern="[0-9]{5}"></div>
-    </div>
-    <div class="field"><label for="notes">Notas (opcional)</label><textarea id="notes" name="notes" maxlength="2000" placeholder="Por ejemplo: la entrada es lateral, hay un escalón en la puerta, necesitamos la rampa antes del invierno."></textarea></div>
-    <p class="alert alert-info hidden" id="zip-note">Ese código postal parece estar fuera de nuestra zona. Envíe la solicitud y le confirmamos si podemos atenderle.</p>
-    <div data-status class="hidden"></div>
-    <div class="row"><button class="btn btn-primary" type="submit">Enviar solicitud</button><a class="btn btn-ghost" href="/panel">Cancelar</a></div>
-  </form>
 </main>
 <footer id="site-footer" class="site-footer"></footer>
 </body>

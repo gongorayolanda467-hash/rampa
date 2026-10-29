@@ -49,12 +49,12 @@ test('páginas públicas, 404 y encabezados de seguridad', async () => {
   assert.equal(home.headers.get('x-content-type-options'), 'nosniff');
   assert.equal(home.headers.get('x-powered-by'), null);
 
-  for (const p of ['/guia', '/entrar', '/registro', '/cotizar', '/panel', '/privacidad', '/terminos']) {
+  for (const p of ['/guia', '/entrar', '/registro', '/cotizar', '/panel', '/financiar', '/admin', '/ayuda', '/financiadores', '/privacidad', '/terminos']) {
     assert.equal((await c(p)).status, 200, p);
   }
   const missing = await c('/no-existe');
   assert.equal(missing.status, 404);
-  assert.match(missing.text, /No encontramos esta página/);
+  assert.match(missing.text, /Esta página no tiene rampa/);
   const apiMissing = await c('/api/nada');
   assert.equal(apiMissing.status, 404);
   assert.equal(apiMissing.json.error, 'Ruta no encontrada.');
@@ -136,4 +136,71 @@ test('contacto, campo trampa y origen ajeno', async () => {
   assert.equal((await c('/api/leads', { method: 'POST', body: lead, origin: 'https://sitio-malo.com' })).status, 403);
   const big = await c('/api/leads', { method: 'POST', body: { ...lead, message: 'x'.repeat(30000) } });
   assert.equal(big.status, 413);
+});
+
+test('mercado: quien necesita, quien paga y privacidad', async () => {
+  const necesita = client();
+  const paga = client();
+  const admin = client();
+  await necesita('/api/auth/register', { method: 'POST', body: { name: 'Elena Soto', email: 'elena@example.com', password: 'frase de elena 1' } });
+  const reg = await paga('/api/auth/register', { method: 'POST', body: { name: 'Fundación Uno', email: 'fund@example.com', password: 'frase de fund 1', role: 'funder' } });
+  assert.equal(reg.status, 400, 'financiador sin organización debe fallar');
+  const reg2 = await paga('/api/auth/register', { method: 'POST', body: { name: 'Ana Fondo', email: 'fund@example.com', password: 'frase de fund 1', role: 'funder', org_name: 'Fundación Uno', kind: 'ong' } });
+  assert.equal(reg2.status, 201);
+  assert.equal(reg2.json.user.role, 'funder');
+  assert.equal(reg2.json.user.funder.verified, false);
+
+  // Un financiador no puede crear solicitudes
+  assert.equal((await paga('/api/quotes', { method: 'POST', body: goodQuote })).status, 403);
+
+  const shared = await necesita('/api/quotes', { method: 'POST', body: { ...goodQuote, zip: '60623', low_income: true, medicaid: 'on', share_consent: true } });
+  assert.equal(shared.status, 201);
+  assert.ok(shared.json.quote.est_low > 0 && shared.json.quote.est_high >= shared.json.quote.est_low);
+  const hidden = await necesita('/api/quotes', { method: 'POST', body: { ...goodQuote, share_consent: false } });
+  assert.equal(hidden.status, 201);
+
+  // Sin verificar no ve casos
+  assert.equal((await paga('/api/funder/cases')).status, 403);
+  await admin('/api/auth/login', { method: 'POST', body: { email: 'admin@example.com', password: 'frase del admin 1' } });
+  const funders = await admin('/api/admin/funders');
+  const fid = funders.json.funders.find(f => f.email === 'fund@example.com').id;
+  assert.equal((await admin(`/api/admin/funders/${fid}/verify`, { method: 'POST', body: { verified: true } })).status, 200);
+
+  const cases = await paga('/api/funder/cases');
+  assert.equal(cases.status, 200);
+  const ids = cases.json.cases.map(c => c.id);
+  assert.ok(ids.includes(shared.json.quote.id), 've el caso compartido');
+  assert.ok(!ids.includes(hidden.json.quote.id), 'no ve el caso sin permiso');
+  const c = cases.json.cases.find(x => x.id === shared.json.quote.id);
+  for (const secret of ['address', 'notes', 'client_name', 'client_email', 'user_id', 'contact_pref']) assert.equal(c[secret], undefined, secret);
+
+  // Ofertas
+  assert.equal((await paga(`/api/funder/cases/${hidden.json.quote.id}/offers`, { method: 'POST', body: { amount: 500, coverage: 'parcial' } })).status, 404);
+  const off = await paga(`/api/funder/cases/${c.id}/offers`, { method: 'POST', body: { amount: 2500, coverage: 'parcial', message: 'Cubrimos materiales' } });
+  assert.equal(off.status, 201);
+
+  // La persona ve la oferta y los programas que le aplican
+  const mine = await necesita('/api/quotes');
+  const q = mine.json.quotes.find(x => x.id === c.id);
+  assert.equal(q.offers.length, 1);
+  assert.equal(q.offers[0].org_name, 'Fundación Uno');
+  const progIds = q.programs.map(p => p.id);
+  assert.ok(progIds.includes('hap') && progIds.includes('idhs') && progIds.includes('cha'));
+
+  // Otra persona no puede aceptar ofertas ajenas
+  assert.equal((await client()(`/api/quotes/${c.id}/offers/${off.json.offer.id}/accept`, { method: 'POST' })).status, 401);
+  const intruso = client();
+  await intruso('/api/auth/register', { method: 'POST', body: { name: 'Intruso', email: 'intruso@example.com', password: 'frase del intruso' } });
+  assert.equal((await intruso(`/api/quotes/${c.id}/offers/${off.json.offer.id}/accept`, { method: 'POST' })).status, 404);
+
+  const acc = await necesita(`/api/quotes/${c.id}/offers/${off.json.offer.id}/accept`, { method: 'POST' });
+  assert.equal(acc.json.offer.status, 'aceptada');
+  const offers = await paga('/api/funder/offers');
+  assert.equal(offers.json.offers[0].status, 'aceptada');
+  assert.equal((await admin('/api/admin/stats')).json.pledged, 2500);
+
+  // Estimado y programas públicos
+  const est = await client()('/api/estimate?product=u&finish=aluminio&rise=30');
+  assert.ok(est.json.low > 0);
+  assert.ok((await client()('/api/programs')).json.programs.length >= 6);
 });

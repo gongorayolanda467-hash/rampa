@@ -2,15 +2,16 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mi panel · Rampa Fácil</title>
-<meta name="description" content="Sus solicitudes de rampa.">
+<meta name="description" content="Sus solicitudes de rampa, programas y ofertas de financiamiento.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0F3D70">
+<meta name="theme-color" content="#1A5FD6">
 <meta property="og:site_name" content="Rampa Fácil">
 <meta property="og:title" content="Mi panel · Rampa Fácil">
-<meta property="og:description" content="Sus solicitudes de rampa.">
+<meta property="og:description" content="Sus solicitudes de rampa, programas y ofertas de financiamiento.">
 <meta property="og:image" content="https://rampa-facil.onrender.com/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,15 +24,17 @@
 <a class="skip" href="#main">Saltar al contenido</a>
 <header id="site-header" class="site-header"></header>
 
-<main id="main" class="page container">
-  <div class="panel-head">
-    <div class="stack">
-      <span class="eyebrow">Mi panel</span>
-      <h1 id="hello">Mis solicitudes</h1>
+<main id="main" class="page">
+  <div class="container">
+    <div class="panel-head">
+      <div class="stack">
+        <span class="eyebrow">Mi panel</span>
+        <h1 id="hello">Mis solicitudes</h1>
+      </div>
+      <a class="btn btn-signal" href="/cotizar">Nueva solicitud</a>
     </div>
-    <a class="btn btn-primary" href="/cotizar">Nueva solicitud</a>
+    <div id="quotes-root" aria-live="polite"></div>
   </div>
-  <div id="quotes-root" aria-live="polite"><div class="loading" role="status"><span class="spinner" aria-hidden="true"></span>Cargando sus solicitudes…</div></div>
 </main>
 <footer id="site-footer" class="site-footer"></footer>
 </body>

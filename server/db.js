@@ -38,6 +38,43 @@ const SCHEMA = [
     message TEXT NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
   )`,
+  // Perfil de quien financia (programas, organizaciones, propietarios, donantes).
+  `CREATE TABLE IF NOT EXISTS funders (
+    user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+    org_name TEXT NOT NULL,
+    kind TEXT NOT NULL,
+    zips TEXT,
+    max_amount INTEGER,
+    housing TEXT,
+    about TEXT,
+    verified BOOLEAN NOT NULL DEFAULT false,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+  )`,
+  // Ofertas de financiamiento sobre una solicitud.
+  `CREATE TABLE IF NOT EXISTS offers (
+    id SERIAL PRIMARY KEY,
+    quote_id INTEGER NOT NULL REFERENCES quotes(id) ON DELETE CASCADE,
+    funder_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    amount INTEGER NOT NULL,
+    coverage TEXT NOT NULL,
+    message TEXT,
+    status TEXT NOT NULL DEFAULT 'pendiente',
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    UNIQUE (quote_id, funder_id)
+  )`,
+  `CREATE INDEX IF NOT EXISTS offers_quote_idx ON offers (quote_id)`,
+  `CREATE INDEX IF NOT EXISTS offers_funder_idx ON offers (funder_id)`,
+];
+
+// Columnas agregadas después de la primera versión. Se aplican una por una y se ignoran si ya existen.
+const COLUMNS = [
+  ['quotes', 'low_income', 'BOOLEAN NOT NULL DEFAULT false'],
+  ['quotes', 'veteran', 'BOOLEAN NOT NULL DEFAULT false'],
+  ['quotes', 'medicaid', 'BOOLEAN NOT NULL DEFAULT false'],
+  ['quotes', 'share_consent', 'BOOLEAN NOT NULL DEFAULT false'],
+  ['quotes', 'est_low', 'INTEGER'],
+  ['quotes', 'est_high', 'INTEGER'],
 ];
 
 function createPool() {
@@ -63,6 +100,13 @@ const pool = createPool();
 async function init() {
   for (const sql of SCHEMA) {
     await pool.query(sql);
+  }
+  for (const [table, column, type] of COLUMNS) {
+    try {
+      await pool.query(`ALTER TABLE ${table} ADD COLUMN ${column} ${type}`);
+    } catch (err) {
+      if (!/already exists|duplicate/i.test(err.message)) throw err;
+    }
   }
 }
 

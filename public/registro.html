@@ -2,15 +2,16 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Crear cuenta · Rampa Fácil</title>
-<meta name="description" content="Cree su cuenta gratis para pedir una cotización de rampa y seguir su solicitud.">
+<meta name="description" content="Cree su cuenta gratis para pedir una rampa o para financiar rampas en Chicago.">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#0F3D70">
+<meta name="theme-color" content="#1A5FD6">
 <meta property="og:site_name" content="Rampa Fácil">
 <meta property="og:title" content="Crear cuenta · Rampa Fácil">
-<meta property="og:description" content="Cree su cuenta gratis para pedir una cotización de rampa y seguir su solicitud.">
+<meta property="og:description" content="Cree su cuenta gratis para pedir una rampa o para financiar rampas en Chicago.">
 <meta property="og:image" content="https://rampa-facil.onrender.com/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,20 +24,38 @@
 <a class="skip" href="#main">Saltar al contenido</a>
 <header id="site-header" class="site-header"></header>
 
-<main id="main" class="page container">
-  <div class="auth-wrap card">
-    <h1>Crear cuenta</h1>
-    <p class="muted">Es gratis. Con su cuenta pide cotizaciones y sigue cada paso de su rampa.</p>
-    <form class="form" id="register-form" novalidate>
-      <div class="field"><label for="name">Nombre completo</label><input id="name" name="name" autocomplete="name" required maxlength="100"></div>
-      <div class="field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" required maxlength="254"></div>
-      <div class="field"><label for="phone">Teléfono (opcional)</label><input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="30"></div>
-      <div class="field"><label for="password">Contraseña</label><input id="password" name="password" type="password" autocomplete="new-password" required minlength="10" maxlength="128" aria-describedby="pw-hint"><span class="hint" id="pw-hint">Mínimo 10 caracteres. Use una frase fácil de recordar.</span></div>
-      <div class="field"><label class="check"><input type="checkbox" name="accept" id="accept" required> <span>Acepto los <a href="/terminos">términos de uso</a> y el <a href="/privacidad">aviso de privacidad</a>.</span></label></div>
-      <div data-status class="hidden"></div>
-      <button class="btn btn-primary" type="submit">Crear cuenta</button>
-    </form>
-    <p class="small">¿Ya tiene cuenta? <a href="/entrar" id="to-login">Entrar</a></p>
+<main id="main" class="page">
+  <div class="container auth">
+    <aside class="auth-side">
+      <span class="eyebrow">Rampa Fácil</span>
+      <h2>Una cuenta, dos formas de ayudar</h2>
+      <ul class="checklist"><li>Si necesitas una rampa: pídela y descubre quién te la puede pagar</li><li>Si puedes pagar: financia casos verificados de tu zona</li><li>Tus datos protegidos y nunca vendidos</li></ul>
+      <img src="/img/aluminio.svg" alt="" width="480" height="300">
+    </aside>
+    <div class="auth-card">
+      <h1>Crear cuenta</h1>
+      <form class="form" id="register-form" novalidate>
+        <fieldset class="field">
+          <legend>¿Qué quieres hacer?</legend>
+          <div class="choices wide" id="role-choices">
+            <label class="choice"><input type="radio" name="role" value="client" checked><span class="t">Necesito una rampa</span><span class="d">Para mí o para alguien de mi familia.</span></label>
+            <label class="choice"><input type="radio" name="role" value="funder"><span class="t">Quiero financiar rampas</span><span class="d">Programa, organización, propietario, empresa o donante.</span></label>
+          </div>
+        </fieldset>
+        <div class="field"><label for="name">Nombre completo</label><input id="name" name="name" autocomplete="name" required maxlength="100"></div>
+        <div class="stack hidden" id="funder-fields">
+          <div class="field"><label for="org_name">Nombre de la organización (o su nombre si es donante individual)</label><input id="org_name" name="org_name" autocomplete="organization" maxlength="120"></div>
+          <div class="field"><label for="kind">Tipo de financiador</label><select id="kind" name="kind"></select></div>
+        </div>
+        <div class="field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" required maxlength="254"></div>
+        <div class="field"><label for="phone">Teléfono (opcional)</label><input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="30"></div>
+        <div class="field"><label for="password">Contraseña</label><input id="password" name="password" type="password" autocomplete="new-password" required minlength="10" maxlength="128" aria-describedby="pw-hint"><span class="hint" id="pw-hint">Mínimo 10 caracteres. Una frase fácil de recordar es más segura.</span></div>
+        <div class="field"><label class="check"><input type="checkbox" name="accept" id="accept" required> <span>Acepto los <a href="/terminos">términos de uso</a> y el <a href="/privacidad">aviso de privacidad</a>.</span></label></div>
+        <div data-status class="hidden"></div>
+        <button class="btn btn-primary btn-lg" type="submit">Crear cuenta gratis</button>
+      </form>
+      <p class="small">¿Ya tiene cuenta? <a href="/entrar" id="to-login">Entrar</a></p>
+    </div>
   </div>
 </main>
 <footer id="site-footer" class="site-footer"></footer>

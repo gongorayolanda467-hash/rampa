@@ -1,6 +1,15 @@
 # Rampa Fácil
 
-Web app para un servicio de diseño, permisos e instalación de rampas accesibles en Chicago. Tiene una página de venta, cuentas de cliente, solicitudes de cotización, un panel de cliente, un panel de administración y una guía con calculadora (normas ADA y ayuda para Sección 8).
+Mercado que conecta a **quien necesita una rampa** (personas con discapacidad, incluidos inquilinos con Sección 8 y residentes de CHA) con **quien puede pagarla** (programas públicos, autoridades de vivienda, propietarios, organizaciones, empresas y donantes). Rampa Fácil diseña, tramita y construye la rampa.
+
+## Cómo funciona el mercado
+
+- **Quien necesita** pide su rampa en 3 pasos, recibe un estimado al instante y ve qué programas le aplican (`server/programs.js`). Puede compartir su caso, sin datos personales, con financiadores verificados.
+- **Quien paga** crea una cuenta de financiador. El equipo la verifica en `/admin`. Luego ve casos anónimos (código postal, altura, modelo, vivienda, estimado), filtra por su zona y ofrece pago total o parcial.
+- **La persona** acepta o rechaza cada oferta desde su panel. El equipo ve todo en `/admin` y coordina el pago y la obra.
+- **Privacidad:** los financiadores nunca reciben nombre, dirección, teléfono, correo ni notas (hay una prueba automática que lo comprueba).
+
+Páginas: `/` (venta), `/ayuda` (quién paga mi rampa), `/financiadores`, `/cotizar`, `/panel`, `/financiar`, `/admin`, `/guia` (calculadora ADA).
 
 - **Servidor:** Node.js 20+ con Express
 - **Base de datos:** PostgreSQL (en desarrollo se usa una base en memoria si no hay `DATABASE_URL`)
@@ -66,6 +75,8 @@ docs/             guía original
 
 ## Antes de abrir al público
 
+- [ ] Ajustar los precios orientativos por pie lineal en `server/catalog.js` (`pricePerFoot`) a los precios reales del negocio.
+- [ ] Revisar los requisitos y enlaces de los programas en `server/programs.js`.
 - [ ] Cambiar el teléfono y el correo de contacto en `public/js/common.js` (`SITE`). Los actuales son de ejemplo.
 - [ ] Si el sitio no queda en `https://rampa-facil.onrender.com`, cambiar esa dirección en las etiquetas `og:` y `canonical` de `public/*.html`, en `public/robots.txt` y en `public/sitemap.xml`.
 - [ ] Confirmar que las promesas de la página son ciertas para el negocio: visita gratis, atención en español e inglés, trámite de permisos, zonas de servicio y tiempos de instalación.

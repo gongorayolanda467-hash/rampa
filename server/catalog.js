@@ -54,6 +54,48 @@ const statuses = [
   { id: 'cancelada', name: 'Cancelada' },
 ];
 
+const funderKinds = [
+  { id: 'programa', name: 'Programa público o de gobierno' },
+  { id: 'vivienda', name: 'Autoridad o administrador de vivienda' },
+  { id: 'propietario', name: 'Propietario o casero' },
+  { id: 'ong', name: 'Organización sin fines de lucro' },
+  { id: 'empresa', name: 'Empresa o fundación' },
+  { id: 'donante', name: 'Donante individual o familiar' },
+];
+
+const coverages = [
+  { id: 'total', name: 'Pago total' },
+  { id: 'parcial', name: 'Pago parcial' },
+];
+
+const offerStatuses = [
+  { id: 'pendiente', name: 'Esperando respuesta' },
+  { id: 'aceptada', name: 'Aceptada' },
+  { id: 'rechazada', name: 'No aceptada' },
+  { id: 'retirada', name: 'Retirada' },
+];
+
+// Precio orientativo por pie lineal instalado (rampa + descansos), en dólares.
+// AJUSTE ESTOS VALORES a los precios reales del negocio.
+const pricePerFoot = {
+  basico: [120, 200], aluminio: [160, 260], cedro: [180, 300], porche: [200, 320],
+  jardin: [250, 450], moderno: [350, 600], ladrillo: [400, 700],
+};
+
+const round100 = n => Math.round(n / 100) * 100;
+
+// Estimado orientativo: largo a pendiente 1:12 más descansos de 5 pies; mínimo 500 dólares.
+function estimate(product, finish, riseIn) {
+  const rise = Math.max(1, Number(riseIn) || 1);
+  if (product === 'umbral' || rise <= 6) return { low: 300, high: 1200, feet: Math.ceil(rise) };
+  const segments = Math.ceil(rise / 30);
+  const feet = Math.ceil(rise + 5 * (segments + 1));
+  const [lo, hi] = pricePerFoot[finish] || pricePerFoot.basico;
+  return { low: Math.max(500, round100(feet * lo)), high: Math.max(900, round100(feet * hi)), feet };
+}
+
 const ids = list => list.map(x => x.id);
 
-module.exports = { products, finishes, housing, mobility, contactPrefs, statuses, ids };
+module.exports = {
+  products, finishes, housing, mobility, contactPrefs, statuses, funderKinds, coverages, offerStatuses, pricePerFoot, estimate, ids,
+};
