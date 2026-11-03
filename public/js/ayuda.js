@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const ids = new Set(['access']);
     if (['cha', 'vale'].includes(d.housing)) ids.add('cha');
     if (d.housing === 'proyecto') ids.add('seccion504');
-    if (d.low_income && /^606\d{2}$|^60827$/.test(d.zip || '')) ids.add('hap');
+    if (d.low_income && /^606\d{2}$|^60827$/.test(d.zip || '')) ids.add('homemod');
     if (d.medicaid) ids.add('idhs');
     if (d.veteran) ids.add('va');
     if (d.housing === 'propia' && d.low_income) ids.add('habitat');

@@ -85,6 +85,6 @@ docs/             guía original
 
 ## Mantenimiento
 
-- Los programas de ayuda (Home Accessibility Program, CHA, IDHS, VA) cambian. Revise la guía una vez al año.
+- Los programas de ayuda (HomeMod de MOPD, CHA, IDHS, VA) cambian. Revise la guía una vez al año.
 - Para regenerar las ilustraciones: `npm run build:img`.
 - Revise vulnerabilidades con `npm audit` cada mes.

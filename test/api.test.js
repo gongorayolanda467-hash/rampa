@@ -185,7 +185,7 @@ test('mercado: quien necesita, quien paga y privacidad', async () => {
   assert.equal(q.offers.length, 1);
   assert.equal(q.offers[0].org_name, 'Fundación Uno');
   const progIds = q.programs.map(p => p.id);
-  assert.ok(progIds.includes('hap') && progIds.includes('idhs') && progIds.includes('cha'));
+  assert.ok(progIds.includes('homemod') && progIds.includes('idhs') && progIds.includes('cha'));
 
   // Otra persona no puede aceptar ofertas ajenas
   assert.equal((await client()(`/api/quotes/${c.id}/offers/${off.json.offer.id}/accept`, { method: 'POST' })).status, 401);
