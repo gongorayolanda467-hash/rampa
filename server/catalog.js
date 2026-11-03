@@ -75,8 +75,9 @@ const offerStatuses = [
   { id: 'retirada', name: 'Retirada' },
 ];
 
-// Precio orientativo por pie lineal instalado (rampa + descansos), en dólares.
-// AJUSTE ESTOS VALORES a los precios reales del negocio.
+// Precio orientativo por pie lineal instalado (rampa + descansos), en dólares, tal como lo ve el cliente.
+// AJUSTE ESTOS VALORES: precio del instalador por pie más la ganancia de Rampa Fácil (15 %),
+// es decir, precio del instalador × 1.15.
 const pricePerFoot = {
   basico: [120, 200], aluminio: [160, 260], cedro: [180, 300], porche: [200, 320],
   jardin: [250, 450], moderno: [350, 600], ladrillo: [400, 700],
